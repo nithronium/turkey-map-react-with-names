@@ -117,8 +117,9 @@ export default class TurkeyMap extends Component<IProps, IState> {
       const cityPlateNumberText = parent.getAttribute('data-plakakodu') + "";
       const cityPlateNumber: number = parseInt(cityPlateNumberText !== "" ? cityPlateNumberText : "0");
       const cityName: string = parent.getAttribute('data-iladi') + "";
-      const city: CityType = { id: cityId, name: cityName, plateNumber: cityPlateNumber, path: cityPath };
-
+      const cityTextElement = parent.querySelector('text');
+      const cityText: string = cityTextElement && cityTextElement.textContent ? cityTextElement.textContent.trim() : '';
+      const city: CityType = { id: cityId, name: cityName, plateNumber: cityPlateNumber, path: cityPath, text: cityText };
       if (callback && typeof callback === 'function') {
         callback(city);
         return;
@@ -142,7 +143,7 @@ export default class TurkeyMap extends Component<IProps, IState> {
         <path style={{ cursor: "pointer", fill: customStyle.idleColor }} d={city.path} />
         dangerouslySetInnerHTML={{ __html: city.text}}
       </g>);
-      let cityType: CityType = { id: city.id, name: city.name, path: city.path, plateNumber: city.plateNumber }
+      let cityType: CityType = { id: city.id, name: city.name, path: city.path, plateNumber: city.plateNumber, text: city.text }
       return { element, cityType }
     });
   }

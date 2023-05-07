@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/erdigokce/turkey-map-react.git"
+    "url": "git+https://github.com/nithronium/turkey-map-react-with-names.git"
   },
   "keywords": [
     "turkey-map-react",
@@ -37,12 +37,12 @@
     "@babel/preset-react": "^7.16.0",
     "@babel/preset-typescript": "^7.16.0",
     "@types/node": "^13.13.2",
-    "@types/react": "^16.9.34",
+    "@types/react": "^16.14.41",
     "@types/react-css-modules": "^4.6.4",
     "@types/react-dom": "^16.9.6",
     "babel-loader": "^8.2.3",
     "path": "^0.12.7",
-    "typescript": "^3.8.3",
+    "typescript": "^5.0.4",
     "webpack": "^5.64.4",
     "webpack-cli": "^4.9.1"
   },
