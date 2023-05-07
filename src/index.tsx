@@ -25,7 +25,7 @@ interface IState {
   tooltipStyle: { left: number, top: number, visibility?: Property.Visibility, animation?: Property.Animation }
 }
 
-export type CityType = { id: string; plateNumber: number; name: string; path: string };
+export type CityType = { id: string; plateNumber: number; name: string; path: string; text: string};
 export type CustomStyleType = { idleColor: string, hoverColor: string };
 export type ViewBoxType = { top: number; left: number; width: number; height: number };
 type GetCitiesReturn = { element: JSX.Element, cityType: CityType };
@@ -140,6 +140,7 @@ export default class TurkeyMap extends Component<IProps, IState> {
         onClick={this.onClick}
       >
         <path style={{ cursor: "pointer", fill: customStyle.idleColor }} d={city.path} />
+        dangerouslySetInnerHTML={{ __html: city.text}}
       </g>);
       let cityType: CityType = { id: city.id, name: city.name, path: city.path, plateNumber: city.plateNumber }
       return { element, cityType }
