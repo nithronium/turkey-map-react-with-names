@@ -131,6 +131,22 @@ export default class TurkeyMap extends Component<IProps, IState> {
     const { data, hoverable, showTooltip, customStyle } = this.props
     const { cities: cityData } = data;
     return cityData.map((city: CityType) => {
+      const textRegex = /<text .* x="(\d+(\.\d+)?)".* y="(\d+(\.\d+)?)".* font-size="(\d+(\.\d+)?)".*>(.*)<\/text>/;
+      const match = city.text.match(textRegex) || [];
+      const x = match[1];
+      const y = match[3];
+      const fontSize = match[5];
+      const textContent = match[7];
+      // Use the extracted values to create the <text> element
+      const textElement = (
+        <text
+          x={x}
+          y={y}
+          style={{ whiteSpace: "pre", fill: "#FFF", fontFamily: "Arial, sans-serif", fontSize: `${fontSize}px` }}
+        >
+          {textContent}
+        </text>
+      );
       let element = (<g id={city.id}
         data-plakakodu={city.plateNumber}
         data-iladi={city.name}
@@ -141,7 +157,7 @@ export default class TurkeyMap extends Component<IProps, IState> {
         onClick={this.onClick}
       >
         <path style={{ cursor: "pointer", fill: customStyle.idleColor }} d={city.path} />
-        dangerouslySetInnerHTML={{ __html: city.text}}
+        {textElement}
       </g>);
       let cityType: CityType = { id: city.id, name: city.name, path: city.path, plateNumber: city.plateNumber, text: city.text }
       return { element, cityType }
